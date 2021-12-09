@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import gurobi.*;
@@ -16,11 +18,13 @@ public class RecolorirCaminhoM1 {
 	}
 
 	public class Caminho{
+		String cenario;
 		int num_nos;
 		int num_cores;
 		No[] lista_nos;
 
-		Caminho(int num_nos, int num_cores, int[] lista_nos){
+		Caminho(String cenario, int num_nos, int num_cores, int[] lista_nos){
+			this.cenario = cenario;
 			this.num_nos = num_nos;
 			this.num_cores = num_cores;
 			this.lista_nos = criaListaDeNos(lista_nos);
@@ -40,11 +44,24 @@ public class RecolorirCaminhoM1 {
 			return cor_vect;
 		}
 	}
+	
+	void salvar_solucao(String nome_arquivo, String solucao) {
+		try {
+			FileWriter myWriter = new FileWriter("resultadosM1/" + nome_arquivo + ".json");
+			myWriter.write(solucao);
+			myWriter.close();
+			System.out.println("Successfully wrote to the file.");
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
 
 	void montaModeloEResolve(Caminho caminho) throws GRBException{
 		// Criando um model 'vazio' para o gurobi
         GRBEnv env = new GRBEnv("malha.log");
 		GRBModel model = new GRBModel(env);
+		model.set(GRB.DoubleParam.TimeLimit, 1800.0);
 
 		//Adicionando variavel no modelo para arcos percorridos por cada veiculo
 		//Definindo variável recolorir(x) como binária[Restrição 5.3]
@@ -60,11 +77,11 @@ public class RecolorirCaminhoM1 {
 
 		//Restrição 5.1: Um vertice pode ser colorido apenas uma vez
 		for(int i=0; i < caminho.num_nos; i++){
-			GRBLinExpr expr = new GRBLinExpr();
+			GRBLinExpr expr5_1 = new GRBLinExpr();
 			for(int j=0; j < caminho.num_cores; j++){
-				expr.addTerm(1.0, caminho.lista_nos[i].recolorir[j]);
+				expr5_1.addTerm(1.0, caminho.lista_nos[i].recolorir[j]);
 			}
-			model.addConstr(expr, GRB.EQUAL, 1, null);
+			model.addConstr(expr5_1, GRB.EQUAL, 1, null);
 		}
 
 		
@@ -74,11 +91,11 @@ public class RecolorirCaminhoM1 {
 			for(int p=0; p < caminho.num_nos; p++){
 				for(int r=p+2; r < caminho.num_nos; r++){
 					for(int q=p+1; q < r; q++){
-						GRBLinExpr expr = new GRBLinExpr();
-						expr.addTerm(1.0, caminho.lista_nos[p].recolorir[i]);
-						expr.addTerm(-1.0, caminho.lista_nos[q].recolorir[i]);
-						expr.addTerm(1.0, caminho.lista_nos[r].recolorir[i]);
-						model.addConstr(expr, GRB.LESS_EQUAL, 1, null);
+						GRBLinExpr expr5_2 = new GRBLinExpr();
+						expr5_2.addTerm(1.0, caminho.lista_nos[p].recolorir[i]);
+						expr5_2.addTerm(-1.0, caminho.lista_nos[q].recolorir[i]);
+						expr5_2.addTerm(1.0, caminho.lista_nos[r].recolorir[i]);
+						model.addConstr(expr5_2, GRB.LESS_EQUAL, 1, null);
 					}
 				}
 			}
@@ -88,11 +105,19 @@ public class RecolorirCaminhoM1 {
 		// chama o solver para resolver o modelo 
 		model.optimize();
 
+		//Retornando solução e salvando em um novo arquivo
         System.out.println("JSON solution :" + model.getJSONSolution());
+		salvar_solucao(caminho.cenario, model.getJSONSolution());
+	}
+
+	String extraiNomeInstancia(String caminho) {
+		String[] aux = caminho.split("/", 999999);
+		return aux[aux.length-1].split(".txt", 999999)[0];
 	}
 
 	void resolveInstancia(String nomeArq) throws Exception {
         Scanner in = new Scanner(new File(nomeArq));
+		String cenario = extraiNomeInstancia(nomeArq);
 	    int num_nos = in.nextInt();
         int num_cores = in.nextInt();
 		int[] lista_nos = new int[num_nos];
@@ -101,7 +126,7 @@ public class RecolorirCaminhoM1 {
 			lista_nos[i] = in.nextInt();
 		}
 
-		Caminho caminho = new Caminho(num_nos, num_cores, lista_nos);
+		Caminho caminho = new Caminho(cenario, num_nos, num_cores, lista_nos);
 
 		montaModeloEResolve(caminho);
     }
