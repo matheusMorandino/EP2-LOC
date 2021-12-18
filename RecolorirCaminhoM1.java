@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import gurobi.*;
@@ -22,12 +23,14 @@ public class RecolorirCaminhoM1 {
 		int num_cores;
 		No[] lista_nos;
 		GRBVar[][] recolorir;
+		String local;
 
-		Caminho(String cenario, int num_nos, int num_cores, int[] lista_nos){
+		Caminho(String cenario, int num_nos, int num_cores, int[] lista_nos, String local){
 			this.cenario = cenario;
 			this.num_nos = num_nos;
 			this.num_cores = num_cores;
 			this.lista_nos = criaListaDeNos(lista_nos);
+			this.local = local;
 		}
 
 		No[] criaListaDeNos(int[] lista_nos){
@@ -45,9 +48,9 @@ public class RecolorirCaminhoM1 {
 		}
 	}
 	
-	void salvar_solucao(String nome_arquivo, String solucao) {
+	void salvar_solucao(String nome_arquivo, String solucao, String tipo, String local) {
 		try {
-			FileWriter myWriter = new FileWriter("resultadosM1/" + nome_arquivo + ".json");
+			FileWriter myWriter = new FileWriter(local + nome_arquivo + tipo);
 			myWriter.write(solucao);
 			myWriter.close();
 			System.out.println("Successfully wrote to the file.");
@@ -59,7 +62,7 @@ public class RecolorirCaminhoM1 {
 
 	void montaModeloEResolve(Caminho caminho) throws GRBException{
 		// Criando um model 'vazio' para o gurobi
-        GRBEnv env = new GRBEnv("malha.log");
+        GRBEnv env = new GRBEnv(caminho.local + caminho.cenario + ".log");
 		GRBModel model = new GRBModel(env);
 		model.set(GRB.DoubleParam.TimeLimit, 1800.0);
 
@@ -106,8 +109,24 @@ public class RecolorirCaminhoM1 {
 		model.optimize();
 
 		//Retornando solução e salvando em um novo arquivo
-        System.out.println("JSON solution :" + model.getJSONSolution());
-		//salvar_solucao(caminho.cenario, model.getJSONSolution());
+		String json = model.getJSONSolution();
+        System.out.println("JSON solution :" + json);
+		int[] resultados = desvetorizaResultado(model.get(GRB.DoubleAttr.X , caminho.recolorir));
+		salvar_solucao(caminho.cenario, model.getJSONSolution(), ".json", caminho.local);
+		salvar_solucao(caminho.cenario, Arrays.toString(resultados)+"_resultado", ".txt", caminho.local);
+	}
+
+	int[] desvetorizaResultado(double[][] res){
+		int[] vect = new int[res.length];
+		for(int i=0; i < res.length; i++){
+			int n = 0;
+			for(int j=0; j < res[0].length; j++){
+				n += (int)Math.round(res[i][j]*(j+1));
+			}
+			vect[i] = n-1;
+			n=0;
+		}
+		return vect;
 	}
 
 	String extraiNomeInstancia(String caminho) {
@@ -115,7 +134,7 @@ public class RecolorirCaminhoM1 {
 		return aux[aux.length-1].split(".txt", 999999)[0];
 	}
 
-	void resolveInstancia(String nomeArq) throws Exception {
+	void resolveInstancia(String nomeArq, String local) throws Exception {
         Scanner in = new Scanner(new File(nomeArq));
 		String cenario = extraiNomeInstancia(nomeArq);
 	    int num_nos = in.nextInt();
@@ -126,24 +145,15 @@ public class RecolorirCaminhoM1 {
 			lista_nos[i] = in.nextInt();
 		}
 
-		Caminho caminho = new Caminho(cenario, num_nos, num_cores, lista_nos);
+		Caminho caminho = new Caminho(cenario, num_nos, num_cores, lista_nos, local);
 
 		montaModeloEResolve(caminho);
     }
 
-	void resolvePacoteInstancias(String path) throws Exception {
+	void resolvePacoteInstancias(String path, String local) throws Exception {
         for (File file : new File(path).listFiles()) {
-            resolveInstancia(path+"/"+file.getName());  
+            resolveInstancia(path+"/"+file.getName(), local);  
         }
     }
 
-    public static void main(String[] args) throws Exception {
-		RecolorirCaminhoM1 recolorirCaminho = new RecolorirCaminhoM1();
-		
-		String diretorioProjeto = "C:/Users/acere/Desktop/Projetos/Faculdade/LOC/EP2-LOC/entradas";
-
-		recolorirCaminho.resolvePacoteInstancias(diretorioProjeto);
-		
-		//recolorirCaminho.resolveInstancia(diretorioProjeto + "/entrada_01_25_5.txt");
-	}
 }

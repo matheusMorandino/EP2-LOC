@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import gurobi.*;
@@ -22,12 +24,14 @@ public class RecolorirCaminhoM2 {
 		int num_cores;
 		No[] lista_nos;
 		GRBVar[][] recolorir;
+		String local;
 
-		Caminho(String cenario, int num_nos, int num_cores, int[] lista_nos){
+		Caminho(String cenario, int num_nos, int num_cores, int[] lista_nos, String local){
 			this.cenario = cenario;
 			this.num_nos = num_nos;
 			this.num_cores = num_cores;
 			this.lista_nos = criaListaDeNos(lista_nos);
+			this.local = local;
 		}
 
 		No[] criaListaDeNos(int[] lista_nos){
@@ -56,11 +60,13 @@ public class RecolorirCaminhoM2 {
 			double[] mais;
 			double[] menos;
 			int c;
+			int p;
 
-			Corte(double[] mais, double[] menos, int c) {
+			Corte(double[] mais, double[] menos, int c, int p) {
 				this.mais = mais;
 				this.menos = menos;
 				this.c = c;
+				this.p = p;
 			}
         }
             
@@ -86,14 +92,14 @@ public class RecolorirCaminhoM2 {
                     Corte corte = separa(x_vals);
      
                     if(corte != null) {
-                        adicionaCorte(corte, n_nos, 1);
+                        adicionaCorte(corte);
                     }
                 } else if (ehHoraCertaDeIncluirLazyConstr()) {
                     double[][] x_vals = getSolution(x);
-                    Corte lazy = separa(x_vals);
+					Corte lazy = separa(x_vals);
      
                     if(lazy != null) {
-                        adicionaLazy(lazy, x_vals.length, 1);
+                        adicionaLazy(lazy);
                     }         
                 }
             } catch (GRBException e) {
@@ -101,30 +107,47 @@ public class RecolorirCaminhoM2 {
             }
         }
              
-        private void montaLadoEsqIneq(Corte corte, GRBLinExpr expr, int i, int sinal) throws GRBException {
-			if(sinal > 0 && i >= 0) {
-				int j = argmax(cortaArray(corte.mais, 0, i));
-				expr.addTerm(1, x[j][corte.c]);
-				montaLadoEsqIneq(corte, expr, j-1, sinal*-1);
-			}
-			else if(i >= 1) {
-				int j = argmax(cortaArray(corte.menos, 1, i));
-				if(corte.menos[j] > 0) {
-					expr.addTerm(-1, x[j][corte.c]);
-					montaLadoEsqIneq(corte, expr, j-1, sinal*-1);
+        private GRBLinExpr montaLadoEsqIneq(Corte corte) throws GRBException {
+			GRBLinExpr expr = new GRBLinExpr();
+			ArrayList<Integer> positivo = new ArrayList<Integer>();
+			ArrayList<Integer> negativo = new ArrayList<Integer>();
+			int j = corte.p;
+			int sinal = -1;
+
+			positivo.add(j);
+			while(true) {
+				if(sinal < 0) {
+					j = argmax(corte.menos, j-1);
+					negativo.add(j);
+						
 				}
+				else {
+					j = argmax(corte.mais, j-1);
+					positivo.add(j);
+					if(j==1 || j==0)
+						break;
+				}
+				sinal = sinal*-1;
 			}
+
+			for(int i=0; i < positivo.size(); i++)
+				expr.addTerm(1, x[positivo.get(i)][corte.c]);
+
+			for(int i=0; i < negativo.size(); i++)
+				expr.addTerm(-1, x[negativo.get(i)][corte.c]);
+
+			return expr;
         }
                 
-        private void adicionaCorte(Corte corte, int i, int sinal) throws GRBException {
-            GRBLinExpr expr = new GRBLinExpr();
-			montaLadoEsqIneq(corte, expr, i, sinal);
+        private void adicionaCorte(Corte corte) throws GRBException {
+            GRBLinExpr expr = montaLadoEsqIneq(corte);
+			
             addCut(expr, GRB.LESS_EQUAL, 1);
         }
         
-        private void adicionaLazy(Corte lazy, int i, int sinal) throws GRBException {
-            GRBLinExpr expr = new GRBLinExpr();
-			montaLadoEsqIneq(lazy, expr, i, sinal);
+        private void adicionaLazy(Corte lazy) throws GRBException {
+            GRBLinExpr expr = montaLadoEsqIneq(lazy);
+			
             addLazy(expr, GRB.LESS_EQUAL, 1);
         }
         
@@ -141,20 +164,20 @@ public class RecolorirCaminhoM2 {
 
 				mais[0] = v[0];
 				mais[1] = v[1];
+				menos[0] = Double.NEGATIVE_INFINITY;
 				menos[1] = v[0] - v[1];
-
+				
+				int p = mais[0] > mais[1] ? 0 : 1;
+				int q = 1;
 				for(int r=2; r < v.length; r++){
-					int p = argmax(cortaArray(mais, 0, r-1));
-					int q = argmax(cortaArray(menos, 1, r-1));
+					p = v[r]+menos[q] > mais[p] ? r : p;
+					q = mais[p]-v[r] > menos[q] ? r : q;
 					mais[r] = Math.max(v[r], menos[q] + v[r]);
 					menos[r] = mais[p] - v[r];
-				}
+				}	
 
 				if(arrayMax(mais) > 1 + EPSILON) {
-					return new Corte(mais, menos, c);
-				}
-				else {
-					return null;
+					return new Corte(mais, menos, c, p);
 				}
 			}
 			return null;
@@ -168,10 +191,10 @@ public class RecolorirCaminhoM2 {
 			return nos;
 		}
 
-		private int argmax(double[] array) {
+		private int argmax(double[] array, int max_range) {
 			double max = array[0];
 			int re = 0;
-			for (int i = 1; i < array.length; i++) {
+			for (int i = 1; i <= max_range; i++) {
 				if (array[i] > max) {
 					max = array[i];
 					re = i;
@@ -199,7 +222,7 @@ public class RecolorirCaminhoM2 {
 
 	void montaModeloEResolve(Caminho caminho) throws GRBException{
 		// Criando um model 'vazio' para o gurobi
-        GRBEnv env = new GRBEnv("malha.log");
+        GRBEnv env = new GRBEnv(caminho.local + caminho.cenario + ".log");
 		GRBModel model = new GRBModel(env);
 		model.set(GRB.DoubleParam.TimeLimit, 1800.0);
 
@@ -233,13 +256,29 @@ public class RecolorirCaminhoM2 {
 		model.optimize();
 
 		//Retornando solução e salvando em um novo arquivo
-        System.out.println("JSON solution :" + model.getJSONSolution());
-		salvar_solucao(caminho.cenario, model.getJSONSolution());
+        String json = model.getJSONSolution();
+        System.out.println("JSON solution :" + json);
+		int[] resultados = desvetorizaResultado(model.get(GRB.DoubleAttr.X , caminho.recolorir));
+		salvar_solucao(caminho.cenario, model.getJSONSolution(), ".json", caminho.local);
+		salvar_solucao(caminho.cenario, Arrays.toString(resultados)+"_resultado", ".txt", caminho.local);
 	}
 
-    void salvar_solucao(String nome_arquivo, String solucao) {
+	int[] desvetorizaResultado(double[][] res){
+		int[] vect = new int[res.length];
+		for(int i=0; i < res.length; i++){
+			int n = 0;
+			for(int j=0; j < res[0].length; j++){
+				n += (int)Math.round(res[i][j]*(j+1));
+			}
+			vect[i] = n-1;
+			n=0;
+		}
+		return vect;
+	}
+
+    void salvar_solucao(String nome_arquivo, String solucao, String tipo, String local) {
 		try {
-			FileWriter myWriter = new FileWriter("resultadosM2/" + nome_arquivo + ".json");
+			FileWriter myWriter = new FileWriter(local + nome_arquivo + tipo);
 			myWriter.write(solucao);
 			myWriter.close();
 			System.out.println("Successfully wrote to the file.");
@@ -254,7 +293,7 @@ public class RecolorirCaminhoM2 {
 		return aux[aux.length-1].split(".txt", 999999)[0];
 	}
 
-	void resolveInstancia(String nomeArq) throws Exception {
+	void resolveInstancia(String nomeArq, String local) throws Exception {
         Scanner in = new Scanner(new File(nomeArq));
 		String cenario = extraiNomeInstancia(nomeArq);
 	    int num_nos = in.nextInt();
@@ -265,24 +304,15 @@ public class RecolorirCaminhoM2 {
 			lista_nos[i] = in.nextInt();
 		}
 
-		Caminho caminho = new Caminho(cenario, num_nos, num_cores, lista_nos);
+		Caminho caminho = new Caminho(cenario, num_nos, num_cores, lista_nos, local);
 
 		montaModeloEResolve(caminho);
     }
 
-	void resolvePacoteInstancias(String path) throws Exception {
+	void resolvePacoteInstancias(String path, String local) throws Exception {
         for (File file : new File(path).listFiles()) {
-            resolveInstancia(path+"/"+file.getName());  
+            resolveInstancia(path+"/"+file.getName(), local);  
         }
     }
 
-    public static void main(String[] args) throws Exception {
-		RecolorirCaminhoM2 recolorirCaminho = new RecolorirCaminhoM2();
-		
-		String diretorioProjeto = "C:/Users/acere/Desktop/Projetos/Faculdade/LOC/EP2-LOC/entradas";
-
-		//recolorirCaminho.resolvePacoteInstancias(diretorioProjeto);
-		
-		recolorirCaminho.resolveInstancia(diretorioProjeto + "/entrada_01_25_5.txt");
-	}
 }

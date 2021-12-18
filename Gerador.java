@@ -1,3 +1,5 @@
+package entradas_ajustadas;
+
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Random;
@@ -6,8 +8,8 @@ public class Gerador {
 	static Random rand = new Random();
 	
 	public static void main(String[] args) throws Exception {
-		int[] n = {25, 50, 75, 100, 125, 150};
-		int[] k = {5, 10, 15, 20};
+		int[] n = {30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85};
+		int[] k = {5, 10, 15, 20, 25, 30};
 		int id = 1;
 		
 		for(int i = 0; i < n.length; i++) {
