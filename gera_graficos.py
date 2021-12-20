@@ -1,4 +1,4 @@
-from os import listdir
+import os
 from os.path import isfile, join
 from mpl_toolkits import mplot3d
 import numpy as np
@@ -21,10 +21,16 @@ def retorna_tamanho_cenario(str):
 def retorna_cores_cenario(str):
     return int(str.split("_")[3].split(".")[0])
 
+def extrai_nome(str):
+    return str.split("\\")[len(str.split("\\"))-1]
 
-MY_PATH = r"C:\Users\acere\Desktop\Projetos\Faculdade\LOC\EP2-LOC\resultadosM1"
 
-arquivos = [f for f in listdir(MY_PATH) if isfile(join(MY_PATH, f))]
+MY_PATH = r"C:\Users\acere\Desktop\Projetos\Faculdade\LOC\EP2-LOC\resultadosM2_ajustados"
+
+arquivos = []
+for file in os.listdir(MY_PATH):
+    if file.endswith(".json"):
+        arquivos.append(extrai_nome(os.path.join(MY_PATH, file)))
 
 #Carregando cenários em lista
 cenarios = []
@@ -50,7 +56,11 @@ for cen in arquivos:
 #Desenhando gráfico
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-ax.plot_trisurf(cores, tamanho, tempo)
+
+ax.plot_trisurf(cores, tamanho, tempo,alpha=1,
+                                      linewidth=0,
+                                      antialiased=True)
+
 ax.scatter3D(cores, tamanho, tempo, c='Orange')
 ax.set_xlabel('cores')
 ax.set_ylabel('tamanho')

@@ -1,0 +1,1 @@
+{ "SolutionInfo": { "Status": 2, "Runtime": "1.1395969390869141e+00", "ObjVal": "20", "ObjBound": "20", "ObjBoundC": "20", "MIPGap": "0", "IntVio": "0", "BoundVio": "0", "ConstrVio": "0", "IterCount": "497", "BarIterCount": 0, "NodeCount": "1", "SolCount": 3, "PoolObjBound": "20", "PoolObjVal": [ "20", "19", "13"]}}
