@@ -1,0 +1,53 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 18:08:49 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 85 rows, 1700 columns and 1700 nonzeros
+Model fingerprint: 0x6ad62001
+Variable types: 0 continuous, 1700 integer (1700 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 5.0000000
+Presolve time: 0.01s
+Presolved: 85 rows, 1700 columns, 1700 nonzeros
+Variable types: 0 continuous, 1700 integer (1700 binary)
+
+Root relaxation: objective 8.500000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   74.50000    0    4    5.00000   74.50000  1390%     -    0s
+     0     0   74.44444    0   12    5.00000   74.44444  1389%     -    0s
+     0     2   74.33333    0    8    5.00000   74.33333  1387%     -    0s
+* 1473   557              25      52.0000000   65.15873  25.3%  21.7    2s
+  3179  1331     cutoff   24        52.00000   63.00000  21.2%  27.1    5s
+  4293  1807   54.90480   19   79   52.00000   57.17549  10.0%  31.4   10s
+  6939  2426   55.16487   21   82   52.00000   56.27764  8.23%  30.9   16s
+  9117  3088   53.00000   28   49   52.00000   56.07604  7.84%  34.1   20s
+ 11400  3930   53.00000   33    -   52.00000   55.85049  7.40%  39.2   25s
+ 13525  4199   53.16780   33   96   52.00000   55.54319  6.81%  44.1   30s
+ 15664  3467     cutoff   24        52.00000   55.07045  5.90%  49.2   35s
+
+Cutting planes:
+  User: 130
+  Gomory: 5
+  MIR: 1
+  Flow cover: 11
+  RLT: 1
+  Lazy constraints: 328
+
+Explored 19615 nodes (932750 simplex iterations) in 38.28 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 52 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.200000000000e+01, best bound 5.200000000000e+01, gap 0.0000%
+
+User-callback calls 42600, time in user-callback 0.67 sec

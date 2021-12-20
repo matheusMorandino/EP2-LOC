@@ -1,0 +1,50 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 17:32:05 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 75 rows, 1575 columns and 1575 nonzeros
+Model fingerprint: 0x5f3b1c65
+Variable types: 0 continuous, 1575 integer (1575 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 3.0000000
+Presolve time: 0.01s
+Presolved: 75 rows, 1575 columns, 1575 nonzeros
+Variable types: 0 continuous, 1575 integer (1575 binary)
+
+Root relaxation: objective 7.500000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   71.00000    0    8    3.00000   71.00000  2267%     -    0s
+     0     0   70.00000    0   14    3.00000   70.00000  2233%     -    0s
+     0     0   70.00000    0   14    3.00000   70.00000  2233%     -    0s
+     0     0   69.75000    0   12    3.00000   69.75000  2225%     -    0s
+     0     0   69.66667    0   14    3.00000   69.66667  2222%     -    0s
+     0     0   69.50000    0   12    3.00000   69.50000  2217%     -    0s
+     0     0   68.00000    0   12    3.00000   68.00000  2167%     -    0s
+     0     0   68.00000    0   18    3.00000   68.00000  2167%     -    0s
+     0     0   68.00000    0   16    3.00000   68.00000  2167%     -    0s
+     0     2   68.00000    0   12    3.00000   68.00000  2167%     -    0s
+*  716   320              27      55.0000000   61.50000  11.8%  10.5    0s
+
+Cutting planes:
+  User: 535
+  MIR: 4
+  Lazy constraints: 162
+
+Explored 1352 nodes (24493 simplex iterations) in 1.03 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 55 3 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.500000000000e+01, best bound 5.500000000000e+01, gap 0.0000%
+
+User-callback calls 3149, time in user-callback 0.03 sec

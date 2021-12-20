@@ -1,0 +1,49 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sat Dec 18 01:49:41 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 32225 rows, 350 columns and 96950 nonzeros
+Model fingerprint: 0x3b130cbd
+Variable types: 0 continuous, 350 integer (350 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 2.0000000
+Presolve time: 0.31s
+Presolved: 32225 rows, 350 columns, 96950 nonzeros
+Variable types: 0 continuous, 350 integer (350 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         25    -infinity     -1.0000000e+00      0s
+       1         49  -2.5000000e+01  -1.3000000e+01      0s
+       2        130  -1.8500000e+01  -1.4833333e+01      0s
+       3        184  -1.8500000e+01  -1.6300000e+01      0s
+       4        227  -1.8500000e+01  -1.6928571e+01      0s
+       5        269  -1.8500000e+01  -1.7277778e+01      0s
+
+Sifting complete
+
+
+Root relaxation: objective 1.850000e+01, 318 iterations, 0.12 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   18.50000    0    6    2.00000   18.50000   825%     -    0s
+H    0     0                      17.0000000   18.50000  8.82%     -    0s
+H    0     0                      18.0000000   18.50000  2.78%     -    0s
+     0     0   18.50000    0    6   18.00000   18.50000  2.78%     -    0s
+
+Explored 1 nodes (388 simplex iterations) in 0.74 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 18 17 2 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.800000000000e+01, best bound 1.800000000000e+01, gap 0.0000%

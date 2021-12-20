@@ -1,0 +1,48 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 06:34:15 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 148240 rows, 600 columns and 445200 nonzeros
+Model fingerprint: 0x38017d4c
+Variable types: 0 continuous, 600 integer (600 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 5.0000000
+Presolve time: 0.58s
+Presolved: 148240 rows, 600 columns, 445200 nonzeros
+Variable types: 0 continuous, 600 integer (600 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         40    -infinity     -1.0000000e+00      1s
+       1         81  -4.0000000e+01  -2.0505888e+01      1s
+       2        412  -2.4134673e+01  -2.2322972e+01      1s
+
+Sifting complete
+
+
+Root relaxation: objective 2.412500e+01, 651 iterations, 0.40 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   24.12500    0   66    5.00000   24.12500   383%     -    1s
+H    0     0                      20.0000000   24.12500  20.6%     -    1s
+     0     0   23.50000    0   68   20.00000   23.50000  17.5%     -    3s
+H    0     0                      22.0000000   23.50000  6.82%     -    3s
+     0     0   23.16667    0   60   22.00000   23.16667  5.30%     -    4s
+H    0     0                      23.0000000   23.16667  0.72%     -    5s
+
+Explored 1 nodes (1331 simplex iterations) in 5.05 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 23 22 20 5 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.300000000000e+01, best bound 2.300000000000e+01, gap 0.0000%

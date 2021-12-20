@@ -1,0 +1,51 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 14:34:35 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 60 rows, 1620 columns and 1620 nonzeros
+Model fingerprint: 0x64d69f2f
+Variable types: 0 continuous, 1620 integer (1620 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 3.0000000
+Presolve time: 0.00s
+Presolved: 60 rows, 1620 columns, 1620 nonzeros
+Variable types: 0 continuous, 1620 integer (1620 binary)
+
+Root relaxation: objective 6.000000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   56.00000    0    4    3.00000   56.00000  1767%     -    0s
+     0     0   52.33333    0   13    3.00000   52.33333  1644%     -    0s
+     0     2   52.11111    0   19    3.00000   52.11111  1637%     -    0s
+  4172  2045   38.53646   16   91    3.00000   38.53646  1185%  18.4    5s
+  6437  2493   27.33333   46   37    3.00000   37.22727  1141%  24.3   10s
+H 7021  2487                       6.0000000   37.02222   517%  25.5   11s
+* 8441  1832              33      33.0000000   37.00000  12.1%  29.0   13s
+  9263  1578   34.00000   47    -   33.00000   36.73529  11.3%  31.0   15s
+ 12906  1555 infeasible   42        33.00000   34.54545  4.68%  34.5   20s
+
+Cutting planes:
+  User: 128
+  Gomory: 2
+  MIR: 4
+  Flow cover: 28
+  Mod-K: 4
+  Lazy constraints: 743
+
+Explored 15282 nodes (510189 simplex iterations) in 21.70 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 33 6 3 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.300000000000e+01, best bound 3.300000000000e+01, gap 0.0000%
+
+User-callback calls 33538, time in user-callback 0.57 sec

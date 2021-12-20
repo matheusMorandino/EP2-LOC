@@ -1,0 +1,53 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 14:18:05 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 35 rows, 175 columns and 175 nonzeros
+Model fingerprint: 0xabd8a1a4
+Variable types: 0 continuous, 175 integer (175 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 10.0000000
+Presolve time: 0.00s
+Presolved: 35 rows, 175 columns, 175 nonzeros
+Variable types: 0 continuous, 175 integer (175 binary)
+
+Root relaxation: objective 3.500000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   29.00000    0    4   10.00000   29.00000   190%     -    0s
+     0     0   27.16667    0   16   10.00000   27.16667   172%     -    0s
+     0     0   26.87500    0   22   10.00000   26.87500   169%     -    0s
+     0     0   26.56349    0   24   10.00000   26.56349   166%     -    0s
+     0     0   26.45098    0   27   10.00000   26.45098   165%     -    0s
+     0     0   26.40580    0   29   10.00000   26.40580   164%     -    0s
+     0     0   26.00000    0    4   10.00000   26.00000   160%     -    0s
+     0     0   26.00000    0    4   10.00000   26.00000   160%     -    0s
+     0     0   26.00000    0    4   10.00000   26.00000   160%     -    0s
+     0     0   25.40000    0   28   10.00000   25.40000   154%     -    0s
+     0     2   25.12903    0   32   10.00000   25.12903   151%     -    0s
+*  393   223               7      20.0000000   22.20000  11.0%  18.3    0s
+
+Cutting planes:
+  User: 350
+  MIR: 2
+  Inf proof: 8
+  RLT: 1
+  Lazy constraints: 97
+
+Explored 538 nodes (8988 simplex iterations) in 0.40 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 20 10 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.000000000000e+01, best bound 2.000000000000e+01, gap 0.0000%
+
+User-callback calls 1341, time in user-callback 0.02 sec

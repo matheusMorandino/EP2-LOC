@@ -1,0 +1,48 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 14:18:30 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 40 rows, 600 columns and 600 nonzeros
+Model fingerprint: 0x123f3cfd
+Variable types: 0 continuous, 600 integer (600 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1.0000000
+Presolve time: 0.00s
+Presolved: 40 rows, 600 columns, 600 nonzeros
+Variable types: 0 continuous, 600 integer (600 binary)
+
+Root relaxation: objective 4.000000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   36.66667    0    6    1.00000   36.66667  3567%     -    0s
+     0     0   36.00000    0    6    1.00000   36.00000  3500%     -    0s
+     0     0   36.00000    0   17    1.00000   36.00000  3500%     -    0s
+     0     0   36.00000    0    4    1.00000   36.00000  3500%     -    0s
+     0     0   34.00000    0   10    1.00000   34.00000  3300%     -    0s
+     0     0   33.66667    0   17    1.00000   33.66667  3267%     -    0s
+     0     0   33.66667    0    6    1.00000   33.66667  3267%     -    0s
+     0     2   33.66667    0    6    1.00000   33.66667  3267%     -    0s
+*  256   154              16      26.0000000   32.40000  24.6%  11.9    0s
+
+Cutting planes:
+  User: 314
+  MIR: 5
+  Lazy constraints: 146
+
+Explored 708 nodes (9304 simplex iterations) in 0.41 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 26 1 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.600000000000e+01, best bound 2.600000000000e+01, gap 0.0000%
+
+User-callback calls 1731, time in user-callback 0.01 sec

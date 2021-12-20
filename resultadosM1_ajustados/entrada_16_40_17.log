@@ -1,0 +1,56 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 06:34:20 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 168000 rows, 680 columns and 504560 nonzeros
+Model fingerprint: 0x006de586
+Variable types: 0 continuous, 680 integer (680 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 2.0000000
+Presolve time: 0.77s
+Presolved: 168000 rows, 680 columns, 504560 nonzeros
+Variable types: 0 continuous, 680 integer (680 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         40    -infinity     -1.0000000e+00      1s
+       1         81  -4.0000000e+01  -2.0505855e+01      1s
+       2        253  -2.5007511e+01  -2.2763368e+01      1s
+       3        428  -2.5007511e+01  -2.5006927e+01      1s
+
+Sifting complete
+
+
+Root relaxation: objective 2.500000e+01, 544 iterations, 0.50 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   25.00000    0   38    2.00000   25.00000  1150%     -    2s
+H    0     0                      22.0000000   25.00000  13.6%     -    2s
+     0     0   24.00000    0   38   22.00000   24.00000  9.09%     -    3s
+H    0     0                      23.0000000   24.00000  4.35%     -    3s
+     0     0     cutoff    0        23.00000   23.00000  0.00%     -    4s
+
+Cutting planes:
+  Gomory: 6
+  Clique: 16
+  MIR: 9
+  Zero half: 36
+  RLT: 7
+  BQP: 13
+
+Explored 1 nodes (1057 simplex iterations) in 4.31 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 23 22 2 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.300000000000e+01, best bound 2.300000000000e+01, gap 0.0000%

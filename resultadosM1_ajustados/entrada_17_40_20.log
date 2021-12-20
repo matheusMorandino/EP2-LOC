@@ -1,0 +1,56 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 06:34:25 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 197640 rows, 800 columns and 593600 nonzeros
+Model fingerprint: 0xc3800e0c
+Variable types: 0 continuous, 800 integer (800 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1.0000000
+Presolve time: 1.99s
+Presolved: 197640 rows, 800 columns, 593600 nonzeros
+Variable types: 0 continuous, 800 integer (800 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         40    -infinity     -1.0000000e+00      3s
+       1         85  -4.0000000e+01  -2.0500000e+01      3s
+       2        362  -2.5750000e+01  -2.2600000e+01      3s
+
+Sifting complete
+
+
+Root relaxation: objective 2.575000e+01, 436 iterations, 0.47 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   25.75000    0   38    1.00000   25.75000  2475%     -    3s
+H    0     0                      22.0000000   25.75000  17.0%     -    3s
+     0     0   24.50000    0   53   22.00000   24.50000  11.4%     -    5s
+H    0     0                      23.0000000   24.50000  6.52%     -    5s
+     0     0   24.50000    0   53   23.00000   24.50000  6.52%     -    5s
+     0     0 infeasible    0        23.00000   23.00000  0.00%     -    6s
+
+Cutting planes:
+  Gomory: 14
+  Clique: 17
+  MIR: 2
+  Zero half: 25
+  RLT: 3
+  BQP: 15
+
+Explored 1 nodes (741 simplex iterations) in 6.41 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 23 22 1 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.300000000000e+01, best bound 2.300000000000e+01, gap 0.0000%

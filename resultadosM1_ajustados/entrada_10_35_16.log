@@ -1,0 +1,52 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 06:33:35 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 104755 rows, 560 columns and 314720 nonzeros
+Model fingerprint: 0xe1cc456f
+Variable types: 0 continuous, 560 integer (560 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 3.0000000
+Presolve time: 0.47s
+Presolved: 104755 rows, 560 columns, 314720 nonzeros
+Variable types: 0 continuous, 560 integer (560 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         35    -infinity     -1.0000000e+00      1s
+       1         69  -3.5000000e+01  -1.8000000e+01      1s
+       2        239  -2.2500000e+01  -2.1000000e+01      1s
+
+Sifting complete
+
+
+Root relaxation: objective 2.250000e+01, 269 iterations, 0.25 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   22.50000    0   46    3.00000   22.50000   650%     -    1s
+H    0     0                      17.0000000   22.50000  32.4%     -    1s
+H    0     0                      20.0000000   22.50000  12.5%     -    1s
+     0     0     cutoff    0        20.00000   20.00000  0.00%     -    1s
+
+Cutting planes:
+  Gomory: 5
+  Zero half: 15
+  RLT: 5
+  BQP: 6
+
+Explored 1 nodes (448 simplex iterations) in 2.00 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 20 17 3 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.000000000000e+01, best bound 2.000000000000e+01, gap 0.0000%

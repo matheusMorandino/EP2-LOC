@@ -1,0 +1,43 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 03:29:49 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 25 rows, 350 columns and 350 nonzeros
+Model fingerprint: 0x2fbd4193
+Variable types: 0 continuous, 350 integer (350 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 2.0000000
+Presolve time: 0.00s
+Presolved: 25 rows, 350 columns, 350 nonzeros
+Variable types: 0 continuous, 350 integer (350 binary)
+
+Root relaxation: objective 2.500000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   23.00000    0    4    2.00000   23.00000  1050%     -    0s
+     0     0   21.00000    0    6    2.00000   21.00000   950%     -    0s
+     0     2   21.00000    0    4    2.00000   21.00000   950%     -    0s
+*   67     0               3      17.0000000   18.00000  5.88%   2.7    0s
+*   68     0               1      18.0000000   18.00000  0.00%   2.7    0s
+
+Cutting planes:
+  User: 56
+  Lazy constraints: 72
+
+Explored 72 nodes (210 simplex iterations) in 0.15 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 18 17 2 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.800000000000e+01, best bound 1.800000000000e+01, gap 0.0000%
+
+User-callback calls 298, time in user-callback 0.01 sec

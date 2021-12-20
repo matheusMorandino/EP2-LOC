@@ -1,0 +1,55 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 01:25:03 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 2756650 rows, 750 columns and 8270250 nonzeros
+Model fingerprint: 0x41fc7070
+Variable types: 0 continuous, 750 integer (750 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 28.0000000
+Presolve removed 0 rows and 0 columns (presolve time = 10s) ...
+Presolve time: 13.32s
+Presolved: 2756650 rows, 750 columns, 8270250 nonzeros
+Variable types: 0 continuous, 750 integer (750 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.5000000e+02   0.000000e+00   8.721000e+04     25s
+   55912    9.0400795e+01   0.000000e+00   1.072707e+08     30s
+  110787    8.6209392e+01   0.000000e+00   2.920162e+06     35s
+  142274    8.3750000e+01   0.000000e+00   0.000000e+00     39s
+  142274    8.3750000e+01   0.000000e+00   0.000000e+00     40s
+
+Root relaxation: objective 8.375000e+01, 142274 iterations, 23.25 seconds
+Total elapsed time = 67.42s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   83.75000    0  300   28.00000   83.75000   199%     -   74s
+H    0     0                      36.0000000   83.75000   133%     -   75s
+H    0     0                      41.0000000   83.75000   104%     -   76s
+H    0     0                      43.0000000   83.75000  94.8%     -   79s
+     0     0          -    0        43.00000   83.75000  94.8%     - 1800s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 128
+  Zero half: 1905
+  RLT: 604
+  BQP: 129
+
+Explored 1 nodes (163442 simplex iterations) in 1800.46 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 43 41 36 28 
+
+Time limit reached
+Best objective 4.300000000000e+01, best bound 8.300000000000e+01, gap 93.0233%

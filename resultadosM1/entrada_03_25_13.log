@@ -1,0 +1,43 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sat Dec 18 01:49:41 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 29925 rows, 325 columns and 90025 nonzeros
+Model fingerprint: 0x2da6a718
+Variable types: 0 continuous, 325 integer (325 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1.0000000
+Presolve time: 0.29s
+Presolved: 29925 rows, 325 columns, 90025 nonzeros
+Variable types: 0 continuous, 325 integer (325 binary)
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0         25    -infinity     -1.0000000e+00      1s
+       1         50  -2.5000000e+01  -1.3000000e+01      1s
+       2        163  -1.7000000e+01  -1.4333333e+01      1s
+
+Sifting complete
+
+
+Root relaxation: objective 1.700000e+01, 202 iterations, 0.18 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0      17.0000000   17.00000  0.00%     -    0s
+
+Explored 0 nodes (202 simplex iterations) in 0.71 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 2: 17 1 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.700000000000e+01, best bound 1.700000000000e+01, gap 0.0000%

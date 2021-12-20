@@ -1,0 +1,51 @@
+
+Gurobi 9.1.2 (win64, Java) logging started Sun Dec 19 14:30:22 2021
+
+Academic license - for non-commercial use only - expires 2022-09-02
+Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+Optimize a model with 60 rows, 300 columns and 300 nonzeros
+Model fingerprint: 0x0d2a82b2
+Variable types: 0 continuous, 300 integer (300 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 18.0000000
+Presolve time: 0.00s
+Presolved: 60 rows, 300 columns, 300 nonzeros
+Variable types: 0 continuous, 300 integer (300 binary)
+
+Root relaxation: objective 6.000000e+01, 0 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   47.50000    0    6   18.00000   47.50000   164%     -    0s
+     0     0   47.00000    0    8   18.00000   47.00000   161%     -    0s
+     0     0   46.87500    0   14   18.00000   46.87500   160%     -    0s
+     0     0   46.64286    0   16   18.00000   46.64286   159%     -    0s
+     0     2   46.32000    0   22   18.00000   46.32000   157%     -    0s
+H  285   205                      19.0000000   43.93333   131%  34.6    0s
+H 1235   716                      20.0000000   35.37052  76.9%  45.8    2s
+  4751  2528   24.78632   28   82   20.00000   32.68506  63.4%  36.9    5s
+ 10204  5606 infeasible   47        20.00000   31.78242  58.9%  40.8   10s
+*13351  4041              34      26.0000000   31.46630  21.0%  45.6   14s
+ 14096  3977   28.11956   24  128   26.00000   31.32852  20.5%  46.8   15s
+ 17764  3580   27.01949   21  118   26.00000   30.16667  16.0%  54.6   20s
+*19952  1624              26      27.0000000   29.38365  8.83%  57.3   23s
+
+Cutting planes:
+  User: 17
+  Lazy constraints: 299
+
+Explored 22882 nodes (1270023 simplex iterations) in 24.39 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 27 26 20 ... 18
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.700000000000e+01, best bound 2.700000000000e+01, gap 0.0000%
+
+User-callback calls 48340, time in user-callback 0.54 sec
